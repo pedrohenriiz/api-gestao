@@ -15,10 +15,12 @@ const Task = sequelize.define('tasks', {
   },
 });
 
-Task.belongsToMany(User, {
-  through: UserTask,
-  foreignKey: 'taskId',
-  otherKey: 'userId',
-});
+Task.associate = function (models) {
+  Task.belongsToMany(models.User, {
+    through: UserTask,
+    foreignKey: 'taskId',
+    otherKey: 'userId',
+  });
+};
 
 export default Task;

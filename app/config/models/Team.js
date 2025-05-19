@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database.js';
 import UserTeam from './UserTeam.js';
+import User from './User.js';
 
 const Team = sequelize.define('teams', {
   id: {
@@ -14,10 +15,12 @@ const Team = sequelize.define('teams', {
   },
 });
 
-Team.belongsToMany(User, {
-  through: UserTeam,
-  foreignKey: 'teamId',
-  otherKey: 'userId',
-});
+Team.associate = function (models) {
+  Team.belongsToMany(models.User, {
+    through: UserTeam,
+    foreignKey: 'teamId',
+    otherKey: 'userId',
+  });
+};
 
 export default Team;

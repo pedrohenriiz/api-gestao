@@ -27,22 +27,24 @@ const User = sequelize.define('users', {
   },
 });
 
-User.belongsToMany(Team, {
-  through: UserTeam,
-  foreignKey: 'userId',
-  otherKey: 'teamId',
-});
+User.associate = function (models) {
+  User.belongsToMany(models.Team, {
+    through: UserTeam,
+    foreignKey: 'userId',
+    otherKey: 'teamId',
+  });
 
-User.belongsToMany(Deviation, {
-  through: UserDeviation,
-  foreignKey: 'userId',
-  otherKey: 'deviationId',
-});
+  User.belongsToMany(models.Deviation, {
+    through: UserDeviation,
+    foreignKey: 'userId',
+    otherKey: 'deviationId',
+  });
 
-User.belongsToMany(Task, {
-  through: UserTask,
-  foreignKey: 'userId',
-  otherKey: 'taskId',
-});
+  User.belongsToMany(models.Task, {
+    through: UserTask,
+    foreignKey: 'userId',
+    otherKey: 'taskId',
+  });
+};
 
 export default User;

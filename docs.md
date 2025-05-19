@@ -9,3 +9,5 @@ npx sequelize-cli db:migrate:undo
 ### Rodar migration
 
 npx sequelize-cli db:migrate
+
+docker-compose up --build

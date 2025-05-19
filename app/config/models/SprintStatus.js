@@ -16,14 +16,16 @@ const SprintStatus = sequelize.define('sprintStatus', {
   },
 });
 
-SprintStatus.belongsTo(Sprint, {
-  as: 'sprintStatus',
-  foreignKey: 'sprintId',
-});
+SprintStatus.associate = function (models) {
+  SprintStatus.belongsTo(models.Sprint, {
+    as: 'sprint',
+    foreignKey: 'sprintId',
+  });
 
-SprintStatus.hasMany(Status, {
-  as: 'sprintStatus',
-  foreignKey: 'sprintStatusId',
-});
+  SprintStatus.hasMany(models.Status, {
+    as: 'sprintStatus',
+    foreignKey: 'sprintStatusId',
+  });
+};
 
 export default SprintStatus;
