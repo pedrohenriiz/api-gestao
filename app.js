@@ -1,15 +1,30 @@
 import express from 'express';
 import sequelize from './app/config/database.js';
-import models from './app/config/models/index.js';
 
 import userRoutes from './infraestructure/http/routes/userRoutes.js';
+import teamRoutes from './infraestructure/http/routes/teamRoutes.js';
 
 const app = express();
 app.use(express.json());
 
+const routes = [
+  {
+    path: '/users',
+    routes: userRoutes,
+  },
+  {
+    path: '/teams',
+    routes: teamRoutes,
+  },
+];
+
 app.get('/', (req, res) => res.send('API rodando!'));
 
-app.use('/users', userRoutes);
+routes.forEach((route) => app.use(route.path, route.routes));
+
+// app.use('/users', userRoutes);
+
+// app.use('/teams', teamRoutes);
 
 sequelize.sync({ force: false, alter: false }).then(() => {
   console.log('Banco sincronizado.');

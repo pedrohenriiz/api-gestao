@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database.js';
 import UserDeviation from './UserDeviation.js';
-import User from './User.js';
 
 const Deviation = sequelize.define('deviations', {
   id: {
@@ -15,10 +14,12 @@ const Deviation = sequelize.define('deviations', {
   },
 });
 
-Deviation.belongsToMany(User, {
-  through: UserDeviation,
-  foreignKey: 'deviationId',
-  otherKey: 'userId',
-});
+Deviation.associate = function (models) {
+  Deviation.belongsToMany(models.User, {
+    through: UserDeviation,
+    foreignKey: 'deviationId',
+    otherKey: 'userId',
+  });
+};
 
 export default Deviation;
