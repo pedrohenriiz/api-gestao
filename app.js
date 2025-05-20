@@ -3,6 +3,7 @@ import sequelize from './app/config/database.js';
 
 import userRoutes from './infraestructure/http/routes/userRoutes.js';
 import teamRoutes from './infraestructure/http/routes/teamRoutes.js';
+import userTeamRoutes from './infraestructure/http/routes/userTeamRoutes.js';
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/teams',
     routes: teamRoutes,
+  },
+  {
+    path: '/user-teams',
+    routes: userTeamRoutes,
   },
 ];
 
