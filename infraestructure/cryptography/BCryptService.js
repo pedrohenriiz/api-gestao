@@ -6,7 +6,7 @@ class BCryptService {
   }
 
   async compare(password, hashed) {
-    return bcryptjs.hash(password, hashed);
+    return bcryptjs.compare(password, hashed);
   }
 }
 export default new BCryptService();

@@ -7,6 +7,7 @@ import { UserRepository } from '../../repositories/UserRepository.js';
 const router = express.Router();
 
 const userRepository = new UserRepository();
+
 const createUserUseCase = new CreateUser(userRepository);
 
 const controller = new UserController(createUserUseCase);

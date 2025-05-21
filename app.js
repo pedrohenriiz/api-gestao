@@ -1,6 +1,7 @@
 import express from 'express';
 import sequelize from './app/config/database.js';
 
+import loginRoutes from './infraestructure/http/routes/loginRoutes.js';
 import userRoutes from './infraestructure/http/routes/userRoutes.js';
 import teamRoutes from './infraestructure/http/routes/teamRoutes.js';
 import userTeamRoutes from './infraestructure/http/routes/userTeamRoutes.js';
@@ -9,6 +10,10 @@ const app = express();
 app.use(express.json());
 
 const routes = [
+  {
+    path: '/login',
+    routes: loginRoutes,
+  },
   {
     path: '/users',
     routes: userRoutes,

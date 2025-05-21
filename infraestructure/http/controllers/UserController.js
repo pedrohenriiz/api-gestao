@@ -7,6 +7,7 @@ export class UserController {
   create = async (req, res) => {
     try {
       const userData = req.body;
+
       const user = await this.createUserUseCase.execute(userData);
       return res.status(201).json(user);
     } catch (error) {

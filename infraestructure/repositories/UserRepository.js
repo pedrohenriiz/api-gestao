@@ -8,4 +8,10 @@ export class UserRepository extends InterfaceUserRepository {
     const user = await User.create({ name, email, password });
     return user;
   }
+
+  async findByEmail({ email }) {
+    const user = await User.findOne({ where: { email } });
+
+    return user;
+  }
 }
