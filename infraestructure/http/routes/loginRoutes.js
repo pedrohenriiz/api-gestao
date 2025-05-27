@@ -12,6 +12,6 @@ const loginUserUseCase = new LoginUser(userRepository);
 
 const controller = new LoginController(loginUserUseCase);
 
-router.post('/', controller.login);
+router.post('/login', controller.login);
 
 export default router;

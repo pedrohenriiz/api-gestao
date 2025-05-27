@@ -5,15 +5,12 @@ import loginRoutes from './infraestructure/http/routes/loginRoutes.js';
 import userRoutes from './infraestructure/http/routes/userRoutes.js';
 import teamRoutes from './infraestructure/http/routes/teamRoutes.js';
 import userTeamRoutes from './infraestructure/http/routes/userTeamRoutes.js';
+import { authMiddleware } from './infraestructure/http/middleware/authMiddleware.js';
 
 const app = express();
 app.use(express.json());
 
-const routes = [
-  {
-    path: '/login',
-    routes: loginRoutes,
-  },
+const privateRoutes = [
   {
     path: '/users',
     routes: userRoutes,
@@ -28,13 +25,11 @@ const routes = [
   },
 ];
 
-app.get('/', (req, res) => res.send('API rodando!'));
+app.use(loginRoutes);
 
-routes.forEach((route) => app.use(route.path, route.routes));
+app.use(authMiddleware);
 
-// app.use('/users', userRoutes);
-
-// app.use('/teams', teamRoutes);
+privateRoutes.forEach((route) => app.use(route.path, route.routes));
 
 sequelize.sync({ force: false, alter: false }).then(() => {
   console.log('Banco sincronizado.');
